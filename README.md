@@ -102,5 +102,38 @@ for n_estimators in tqdm(n_estimators_range):
 
                 mlflow.sklearn.log_model(model, "model")
 ```
+```python
+x_train, x_test, y_train, y_test = train_test_split(X_features, Y_feature, test_size=0.20, random_state=4)
+
+scaler = StandardScaler()
+
+normalized_x_train = pd.DataFrame(scaler.fit_transform(x_train), columns = x_train.columns)
+LR = LogisticRegression(C=0.01, solver='liblinear').fit(normalized_x_train, y_train)
+
+normalized_x_test = pd.DataFrame(scaler.transform(x_test), columns = x_test.columns)
+y_test_pred = LR.predict(normalized_x_test)
+```
+
+#### maping işlemi
+
+```python
+s.map({'cat': 'kitten', 'dog': 'puppy'})
+```
+
+#### undersampling
+
+```python
+from imblearn.combine import SMOTETomek
+smote_tomek = SMOTETomek(random_state=0)
+X_resampled, y_resampled = smote_tomek.fit_resample(X, y)
+print(sorted(Counter(y_resampled).items()))
+```
+
+#### istenilen şekilde sample alma
+
+```python
+big_feat = shuffled_df.loc[shuffled_df['motion'] == 0].sample(n=492,random_state=42)
+```
+
 
 
