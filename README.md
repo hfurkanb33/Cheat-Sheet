@@ -105,6 +105,7 @@ for n_estimators in tqdm(n_estimators_range):
 ```python
 x_train, x_test, y_train, y_test = train_test_split(X_features, Y_feature, test_size=0.20, random_state=4)
 
+#### scaling
 scaler = StandardScaler()
 
 normalized_x_train = pd.DataFrame(scaler.fit_transform(x_train), columns = x_train.columns)
